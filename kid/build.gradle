@@ -1,0 +1,33 @@
+// -- gradle assemble will call task cZip and cZip2
+// -- to clary dependency on these artifacts, use:
+// -- compile project(path : ':kid', configuration : 'cusc')
+// -- notice the apply plugin : 'base' here
+apply plugin: 'base'
+
+configurations {
+  //declaring new configuration that will be used to associate with artifacts
+  cusc
+  cus2
+}
+
+task cZip(type: Zip) {
+  destinationDir buildDir
+  baseName 'me'
+  from 'k.txt'
+}
+
+task cZip2(type: Zip) {
+  destinationDir buildDir
+  baseName 'me2'
+  from 'k2.txt'
+}
+
+task dd() << {
+	println ("tasks['cZip'].archivePath is: ${tasks['cZip'].archivePath}")
+}
+//associating the task that produces the artifact with the configuration
+artifacts {
+  //configuration name and the task:
+  cusc cZip
+  cus2 cZip2
+}

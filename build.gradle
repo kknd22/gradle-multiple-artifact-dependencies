@@ -1,0 +1,21 @@
+// -- gradle assemble will call task cZip and cZip2
+// -- to clary dependency on these artifacts, use:
+// -- compile project(path : ':kid', configuration : 'cusc')
+// -- notice the apply plugin : 'base' in kid
+
+/* output is like following
+>gradle jar
+:kid:cZip
+:compileJava
+:processResources
+:classes
+:jar
+
+BUILD SUCCESSFUL
+
+*/
+apply plugin : 'java'
+
+dependencies {
+	compile project(path : ':kid', configuration : 'cusc')
+}
